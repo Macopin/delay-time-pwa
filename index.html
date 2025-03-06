@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音の伝達時間 / ディレイタイムの計算</title>
+    
+    <!-- PWA用の設定 -->
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.png">
+    
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("service-worker.js")
@@ -12,6 +16,7 @@
                 .catch(error => console.log("Service Worker registration failed:", error));
         }
     </script>
+
     <style>
         body {
             text-align: center;
@@ -39,13 +44,18 @@
             text-align: center;
         }
         .result-box {
-            margin-top: 100px;
+            margin-top: 50px;
             font-size: 32px;
             font-weight: bold;
             color: black;
         }
         .result-number {
             color: red;
+        }
+        .reference {
+            margin-top: 46px;
+            font-size: 18px;
+            color: blue;
         }
         .title {
             font-size: 28px;
@@ -60,11 +70,11 @@
     
     <div class="container">
         <label for="temperature">気温（℃）</label><br>
-        <input type="number" id="temperature" value="25">
+        <input type="number" id="temperature" value="15.5">
         <br><br>
 
         <label for="distance">距離（cm）</label><br>
-        <input type="number" id="distance" value="40">
+        <input type="number" id="distance" value="50">
         <br><br>
 
         <button onclick="calculateTime()">計算</button>
@@ -72,6 +82,10 @@
 
     <div class="result-box">
         結果: <span id="result" class="result-number">-</span> ミリ秒
+    </div>
+
+    <div class="reference">
+        基準<br>気温15℃では1ミリ秒 (1ms=0.001s)=34cm
     </div>
 
     <script>
